@@ -1,13 +1,11 @@
-
+import React from 'react'
+import Navbar from './components/Navbar'
 import './App.css'
-
-function App() {
-
-
+const App = () => {
   return (
-    <>
-     
-    </>
+    <div>
+      <Navbar />
+    </div>
   )
 }
 
