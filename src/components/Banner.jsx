@@ -14,7 +14,7 @@ export const Banner = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=10`);
+        const res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=20`);
         const data = await res.json();
         setGames(data.results || []);
       } catch (err) {
