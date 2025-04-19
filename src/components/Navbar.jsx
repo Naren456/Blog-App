@@ -1,16 +1,38 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from './../assets/logo.png';
 
 const Navbar = () => {
   return (
-    <div className='bg-blue-500 h-[70px]'> 
-      <ul className='flex list-none gap-10 ml-5 text-[25px]'>
-        <li className='mt-4 hover:text-white cursor-pointer'>Home</li>
-         <li className='mt-4 hover:text-white cursor-pointer'>Trendings</li>
-         <li className='mt-4 hover:text-white cursor-pointer'>National</li>
-         <li className='mt-4 hover:text-white  cursor-pointer'>International</li>
-      </ul>
-    </div>
-  )
-}
+    <nav className="bg-gray-900 text-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+        
 
-export default Navbar
+        <Link to="/" className="flex items-center space-x-2">
+          <img src={logo} alt="Logo" className="h-8 w-8" />
+          <span className="text-xl font-bold text-indigo-400">GameZone</span>
+        </Link>
+
+
+        <ul className="hidden md:flex space-x-6 text-lg">
+          <li>
+            <Link to="/" className="hover:text-indigo-400">Home</Link>
+          </li>
+          <li>
+            <Link to="/games" className="hover:text-indigo-400">Games</Link>
+          </li>
+          <li>
+            <Link to="/about" className="hover:text-indigo-400">About</Link>
+          </li>
+        </ul>
+
+     
+        <div className="md:hidden">
+      
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
