@@ -23,7 +23,7 @@ const TrendingGames = () => {
 
   return (
     <div className="mt-12">
-      <h2 className="text-2xl font-bold mb-4 text-center">🔥 Trending Games</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Trending Games</h2>
       <div className="overflow-x-auto no-wrap px-4 py-2 scrollbar-hide">
   <div className="flex gap-4 snap-x snap-mandatory scroll-smooth ">
     {trendingGames.slice(20,).map((game) => (
