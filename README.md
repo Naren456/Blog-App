@@ -4,12 +4,15 @@
 GameZone is a platform where you can find yor favourite games and see their rating and system requirement and other detail also.
 ## Features :
 1.Filter Games on Genre
+
 2.Search your Game
-3.Save your Favorite Games 
+
+3.Save your Favorite Games
+
 4.Get Games on System Requirements
 
 ## Tech Stack :
-*React 
-*Tailwind
+- React 
+- Tailwind
 
 
