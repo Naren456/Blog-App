@@ -21,7 +21,7 @@ Users can also save their favorite games for quick access later.
 ```
 
 
-## 🛠️ Setup Instructions
+##  Setup Instructions
 
 1. Clone the repo  
    ```bash
