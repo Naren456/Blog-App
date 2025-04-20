@@ -6,8 +6,7 @@ import GameInfo from '../components/GameDetails/GameInfo';
 import GameDescription from '../components/GameDetails/GameDescription';
 import Platforms from '../components/GameDetails/Platforms';
 import SystemRequirements from '../components/GameDetails/SystemRequirements';
-import Screenshots from '../components/GameDetails/Screenshots';
-import Tags from '../components/GameDetails/Tags';
+
 
 const GameDetail = () => {
   const { id } = useParams();
@@ -71,8 +70,8 @@ const GameDetail = () => {
           <SystemRequirements platforms={game.platforms} />
           <GameDescription description={game.description} />
           <Platforms platforms={game.platforms} />
-          <Screenshots screenshots={game.short_screenshots} />
-          <Tags tags={game.tags} />
+     
+          
         </div>
       </div>
     </div>
