@@ -14,5 +14,6 @@ GameZone is a platform where you can find yor favourite games and see their rati
 ## Tech Stack :
 - React 
 - Tailwind
-
+## Deployment Link :
+game-zones.netlify.app/
 
