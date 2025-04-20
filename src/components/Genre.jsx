@@ -12,7 +12,6 @@ const Genre = () => {
   const PAGE_SIZE = 20;
   const MAX_PAGES = 10;
 
-
   const fetchGenres = async () => {
     try {
       const res = await fetch(`https://api.rawg.io/api/genres?key=${API_KEY}`);
@@ -44,15 +43,14 @@ const Genre = () => {
     }
   };
 
-
   useEffect(() => {
     fetchGenres();
-    fetchGames('', 1); 
+    fetchGames('', 1);
   }, []);
 
   const handleGenreChange = (genreName) => {
     setSelectedGenre(genreName);
-    setCurrentPage(1); 
+    setCurrentPage(1);
     const selected = genres.find((g) => g.name === genreName);
     fetchGames(selected?.slug || '', 1);
   };
@@ -70,60 +68,59 @@ const Genre = () => {
     fetchGames(selected?.slug || '', nextPage);
   };
 
-  
-
   return (
-    <div className="p-6 bg-gray-900 min-h-screen text-white">
-   
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Trending Games</h1>
+    <div className="px-4 sm:px-6 lg:px-8 py-6 bg-gray-900 min-h-screen text-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold">{selectedGenre} Games</h1>
 
-        <select
-          value={selectedGenre}
-          onChange={(e) => handleGenreChange(e.target.value)}
-          className="bg-gray-800 text-white border border-gray-700 rounded-lg px-3 py-2"
-        >
-          {genres.map((genre) => (
-            <option key={genre.slug} value={genre.name}>
-              {genre.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-   
-      {loading ? (
-        <div className="flex justify-center items-center h-40">
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+          <div className="w-full sm:w-auto">
+            <select
+              value={selectedGenre}
+              onChange={(e) => handleGenreChange(e.target.value)}
+              className="w-full sm:w-auto bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {genres.map((genre) => (
+                <option key={genre.slug} value={genre.name}>
+                  {genre.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {games.map((game) => (
-              <GameCard key={game.id} game={game} />
-            ))}
-          </div>
 
-       
-          <div className="flex justify-center items-center gap-4 mt-8">
-            <button
-              onClick={() => handlePageChange('prev')}
-              disabled={currentPage === 1}
-              className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <span className="text-lg">{currentPage}</span>
-            <button
-              onClick={() => handlePageChange('next')}
-              disabled={currentPage === MAX_PAGES}
-              className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50"
-            >
-              Next
-            </button>
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[300px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
           </div>
-        </>
-      )}
+        ) : (
+          <>
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+              {games.map((game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </div>
+
+            <div className="flex justify-center items-center gap-4 mt-8">
+              <button
+                onClick={() => handlePageChange('prev')}
+                disabled={currentPage === 1}
+                className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50 hover:bg-gray-600 transition-colors"
+              >
+                Previous
+              </button>
+              <span className="text-lg font-medium px-4">{currentPage}</span>
+              <button
+                onClick={() => handlePageChange('next')}
+                disabled={currentPage === MAX_PAGES}
+                className="px-4 py-2 bg-gray-700 text-white rounded-lg disabled:opacity-50 hover:bg-gray-600 transition-colors"
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
