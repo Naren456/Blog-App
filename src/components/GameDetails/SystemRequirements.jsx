@@ -17,7 +17,7 @@ const SystemRequirements = ({ platforms }) => {
       graphics: extract(/Graphics:?\s*([^:\n]+)/i) || extract(/GPU:?\s*([^:\n]+)/i) || extract(/Video Card:?\s*([^:\n]+)/i),
       storage: extract(/Storage:?\s*([^:\n]+)/i) || extract(/Hard Drive:?\s*([^:\n]+)/i) || extract(/Disk space:?\s*([^:\n]+)/i),
       directx: extract(/DirectX:?\s*([^:\n]+)/i),
-      network: extract(/Network:?\s*([^:\n]+)/i) || extract(/Internet:?\s*([^:\n]+)/i)
+
     };
   };
 
@@ -28,7 +28,7 @@ const SystemRequirements = ({ platforms }) => {
     { name: 'Graphics', key: 'graphics' },
     { name: 'Storage', key: 'storage' },
     { name: 'DirectX', key: 'directx' },
-    { name: 'Network', key: 'network' }
+ 
   ];
 
   const pcPlatform = platforms?.find(p => p.platform.name === "PC");
