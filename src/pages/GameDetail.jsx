@@ -70,8 +70,6 @@ const GameDetail = () => {
           <SystemRequirements platforms={game.platforms} />
           <GameDescription description={game.description} />
           <Platforms platforms={game.platforms} />
-     
-          
         </div>
       </div>
     </div>
