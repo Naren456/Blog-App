@@ -70,6 +70,8 @@ const Genre = () => {
     fetchGames(selected?.slug || '', nextPage);
   };
 
+  
+
   return (
     <div className="p-6 bg-gray-900 min-h-screen text-white">
    
@@ -111,7 +113,7 @@ const Genre = () => {
             >
               Previous
             </button>
-            <span className="text-lg">Page {currentPage}</span>
+            <span className="text-lg">{currentPage}</span>
             <button
               onClick={() => handlePageChange('next')}
               disabled={currentPage === MAX_PAGES}
