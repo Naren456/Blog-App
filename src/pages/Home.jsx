@@ -6,7 +6,7 @@ const Home = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-900 p-4">
+    <div className="px-4 sm:px-6 lg:px-8 py-6 bg-gray-900 min-h-screen text-white mt-16">
          <Banner />
      <TrendingGames />
      <Genre />

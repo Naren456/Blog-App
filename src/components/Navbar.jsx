@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-
+  const [search,Setsearch] = useState('')
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -12,6 +12,10 @@ const Navbar = () => {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const ChangeHandler = (e) => (
+    Setsearch(e.target.value)
+  );
 
   return (
     <nav className="bg-gray-800 shadow-lg fixed w-full top-0 z-50">
@@ -21,7 +25,9 @@ const Navbar = () => {
           <Link to="/" className="flex items-center" onClick={closeMenu}>
             <span className="text-white text-lg sm:text-xl md:text-2xl font-bold tracking-wide">GameZone</span>
           </Link>
-
+          <div className='border-solid border-white'>
+          <input type='text'placeholder="Search here" value={search} className='w-[100px] p-2 ' onChange={ChangeHandler}/>
+        </div> 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
             <Link
