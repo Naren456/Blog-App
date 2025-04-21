@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Banner = () => {
   const [games, setGames] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const API_KEY = 'a52f7654d212491c82e635495ba2129a';
+  const navigate = useNavigate();
 
   const resizeImage = (url, width) => {
     if (!url) return '';
@@ -14,7 +15,7 @@ export const Banner = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const res = await fetch(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=20`);
+        const res = await fetch(`https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API_KEY}&page_size=20`);
         const data = await res.json();
         setGames(data.results || []);
       } catch (err) {
@@ -23,7 +24,13 @@ export const Banner = () => {
     };
 
     fetchGames();
-  }, [API_KEY]);
+  }, []);
+
+  const handleClick = () => {
+    if (games[currentIndex]) {
+      navigate(`/game/${games[currentIndex].id}`); 
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,7 +42,9 @@ export const Banner = () => {
   if (!games.length) return <div className="text-center text-white py-10">Loading games...</div>;
 
   return (
-    <div className="relative w-full h-[220px] sm:h-[300px] md:h-[420px] lg:h-[500px] overflow-hidden rounded-xl shadow-xl">
+    <div className="relative w-full h-[220px] sm:h-[300px] md:h-[420px] lg:h-[500px] overflow-hidden rounded-xl shadow-xl"
+    onClick={handleClick}
+    >
 
       <img
         src={resizeImage(games[currentIndex].background_image, 640)}

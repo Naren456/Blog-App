@@ -43,7 +43,7 @@ const Navbar = () => {
                 placeholder="Search games..."
                 value={search}
                 onChange={handleSearch}
-                className="w-full px-4 py-2 text-gray-700 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 text-white bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
                 type="submit"
@@ -65,6 +65,9 @@ const Navbar = () => {
               </button>
             </div>
           </form>
+
+
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
