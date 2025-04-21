@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Home, Heart, Gamepad, Search, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,79 +32,74 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center" onClick={closeMenu}>
+          <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
+            <Gamepad className="w-6 h-6 text-blue-500" />
             <span className="text-white text-lg sm:text-xl md:text-2xl font-bold tracking-wide">GameZone</span>
           </Link>
 
           {/* Search Bar */}
-          <form onSubmit={handleSubmit} className="flex-1 max-w-lg mx-4">
+          <form onSubmit={handleSubmit} className="hidden md:flex items-center">
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search games..."
                 value={search}
                 onChange={handleSearch}
-                className="w-full px-4 py-2 text-white bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-64 px-4 py-1 pr-10 text-gray-700 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+                <Search className="w-4 h-4" />
               </button>
             </div>
           </form>
 
-
-
-
-          {/* Desktop Navigation */}
+          {/* Desktop  */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
             <Link
               to="/"
-              className={`text-base lg:text-lg transition-all duration-200 hover:scale-105 ${
+              className={`text-base lg:text-lg transition-all duration-200 hover:scale-105 flex items-center gap-2 ${
                 location.pathname === '/'
                   ? 'text-white font-semibold'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
-              Home
+           
+              <span>Home</span>
             </Link>
             
             <Link
               to="/saved-games"
-              className={`text-base lg:text-lg transition-all duration-200 hover:scale-105 ${
+              className={`text-base lg:text-lg transition-all duration-200 hover:scale-105 flex items-center gap-2 ${
                 location.pathname === '/saved-games'
                   ? 'text-white font-semibold'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
-              Favourite
+         
+              <span>Favourite</span>
             </Link>
 
             <Link
               to="/recommendations"
-              className={`text-base lg:text-lg transition-all duration-200 hover:scale-105 ${
+              className={`text-base lg:text-lg transition-all duration-200 hover:scale-105 flex items-center gap-2 ${
                 location.pathname === '/recommendations'
                   ? 'text-white font-semibold'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
-              Recommendations
+     
+              <span>Recommendations</span>
             </Link>
           </div>
+
+
+
+
+
+
 
           {/* Mobile Menu Button */}
           <button
@@ -111,25 +107,23 @@ const Navbar = () => {
             className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-label="Toggle menu"
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            {isMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+
+
+
+
+
+
+
+
+        {/* Mobile */}
         <div
           className={`md:hidden transition-all duration-300 ease-in-out ${
             isMenuOpen
@@ -138,40 +132,62 @@ const Navbar = () => {
           }`}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
+            {/* Search */}
+            <form onSubmit={handleSubmit} className="mb-2">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search games..."
+                  value={search}
+                  onChange={handleSearch}
+                  className="w-full px-4 py-2 pr-10 text-gray-700 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  <Search className="w-4 h-4" />
+                </button>
+              </div>
+            </form>
+
             <Link
               to="/"
               onClick={closeMenu}
-              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
                 location.pathname === '/'
                   ? 'bg-gray-700 text-white'
                   : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
             >
-              Home
+         
+              <span>Home</span>
             </Link>
 
             <Link
               to="/saved-games"
               onClick={closeMenu}
-              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
                 location.pathname === '/saved-games'
                   ? 'bg-gray-700 text-white'
                   : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
             >
-              Favourite
+     
+              <span>Favourite</span>
             </Link>
 
             <Link
               to="/recommendations"
               onClick={closeMenu}
-              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
                 location.pathname === '/recommendations'
                   ? 'bg-gray-700 text-white'
                   : 'text-gray-300 hover:bg-gray-700 hover:text-white'
               }`}
             >
-              Recommendations
+      
+              <span>Recommendations</span>
             </Link>
           </div>
         </div>
