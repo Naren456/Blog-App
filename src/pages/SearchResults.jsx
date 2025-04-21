@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import GameCard from '../components/GameCard';
+import { fetchGames, fetchGenres } from '../utils/api';
 
 const SearchResults = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,14 +13,9 @@ const SearchResults = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchGenres = async () => {
+    const getGenres = async () => {
       try {
-        const url = `https://api.rawg.io/api/genres?key=${import.meta.env.VITE_RAWG_API_KEY}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Failed to fetch genres');
-        }
-        const data = await response.json();
+        const data = await fetchGenres();
         const fetchedGenres = data.results.map((genre) => ({
           name: genre.name,
           slug: genre.slug,
@@ -30,37 +26,29 @@ const SearchResults = () => {
       }
     };
 
-    fetchGenres();
+    getGenres();
   }, []);
 
   useEffect(() => {
-    const fetchGames = async () => {
+    const getGames = async () => {
       if (!query) return;
       
       setLoading(true);
       setError(null);
       
       try {
-        const params = new URLSearchParams({
-          key: import.meta.env.VITE_RAWG_API_KEY,
+        const params = {
           search: query,
           search_exact: true,
           page_size: 5,
           ordering: '-rating'
-        });
+        };
 
         if (selectedGenre) {
-          params.append('genres', selectedGenre);
+          params.genres = selectedGenre;
         }
 
-        const url = `https://api.rawg.io/api/games?${params.toString()}`;
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch games');
-        }
-
-        const data = await response.json();
+        const data = await fetchGames(params);
         setGames(data.results);
       } catch (err) {
         setError('Failed to fetch games. Please try again later.');
@@ -70,7 +58,7 @@ const SearchResults = () => {
       }
     };
 
-    fetchGames();
+    getGames();
   }, [query, selectedGenre]);
 
   const handleGenreChange = (genreSlug) => {
