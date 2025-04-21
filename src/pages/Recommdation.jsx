@@ -7,7 +7,7 @@ const Recommdation = () => {
   const [loading, setLoading] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const API_KEY = 'a52f7654d212491c82e635495ba2129a';
+
 
   const [formData, setFormData] = useState({
     cpu: '',
@@ -20,7 +20,7 @@ const Recommdation = () => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const res = await fetch(`https://api.rawg.io/api/genres?key=${API_KEY}`);
+        const res = await fetch(`https://api.rawg.io/api/genres?key=${import.meta.env.VITE_RAWG_API_KEY}`);
         const data = await res.json();
         setGenres(data.results || []);
       } catch (err) {
@@ -55,7 +55,7 @@ const Recommdation = () => {
     try {
       const genreParam = formData.selectedGenres.join(',');
       const res = await fetch(
-        `https://api.rawg.io/api/games?key=${API_KEY}&genres=${genreParam}&ordering=-rating&page_size=20`
+        `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API_KEY}&genres=${genreParam}&ordering=-rating&page_size=20`
       );
       const data = await res.json();
       setRecommendations(data.results || []);

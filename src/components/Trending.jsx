@@ -3,13 +3,13 @@ import GameCard from "./GameCard";
 
 const TrendingGames = () => {
   const [trendingGames, setTrendingGames] = useState([]);
-  const API_KEY = 'a52f7654d212491c82e635495ba2129a';
+
 
   useEffect(() => {
     const fetchTrending = async () => {
       try {
         const res = await fetch(
-          `https://api.rawg.io/api/games?key=${API_KEY}&ordering=-added&page_size=45`
+          `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API_KEY}&ordering=-added&page_size=45`
         );
         const data = await res.json();
         setTrendingGames(data.results || []);
@@ -26,7 +26,7 @@ const TrendingGames = () => {
       <h2 className="text-2xl font-bold mb-4 text-center">Trending Games</h2>
       <div className="overflow-x-auto no-wrap px-4 py-2 scrollbar-hide">
   <div className="flex gap-4 snap-x snap-mandatory scroll-smooth ">
-    {trendingGames.slice(20,).map((game) => (
+    {trendingGames.slice(25,).map((game) => (
       <div key={game.id} className="snap-start shrink-0 w-[250px]">
         <GameCard game={game} />
       </div>

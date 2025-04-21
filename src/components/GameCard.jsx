@@ -12,7 +12,7 @@ const GameCard = ({ game }) => {
   };
 
   const handleSave = (e) => {
-    e.stopPropagation(); // Prevent navigation when clicking save button
+    e.stopPropagation();
     toggleSaveGame(game);
   };
 
@@ -21,7 +21,7 @@ const GameCard = ({ game }) => {
       className="bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-200 relative group"
       onClick={handleClick}
     >
-      {/* Save Button */}
+
       <button
         onClick={handleSave}
         className="absolute top-2 right-2 p-2 bg-gray-900 bg-opacity-70 rounded-full z-10 

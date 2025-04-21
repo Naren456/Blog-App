@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GameCard from './GameCard';
+import Loader from "./Loader"
 
 const Genre = () => {
   const [games, setGames] = useState([]);
@@ -8,13 +9,13 @@ const Genre = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const API_KEY = 'a52f7654d212491c82e635495ba2129a';
+
   const PAGE_SIZE = 20;
   const MAX_PAGES = 10;
 
   const fetchGenres = async () => {
     try {
-      const res = await fetch(`https://api.rawg.io/api/genres?key=${API_KEY}`);
+      const res = await fetch(`https://api.rawg.io/api/genres?key=${import.meta.env.VITE_RAWG_API_KEY}`);
       const data = await res.json();
       const fetchedGenres = data.results.map((genre) => ({
         name: genre.name,
@@ -30,8 +31,8 @@ const Genre = () => {
     try {
       setLoading(true);
       const url = genreSlug
-        ? `https://api.rawg.io/api/games?key=${API_KEY}&genres=${genreSlug}&ordering=-added&page_size=${PAGE_SIZE}&page=${page}`
-        : `https://api.rawg.io/api/games?key=${API_KEY}&ordering=-added&page_size=${PAGE_SIZE}&page=${page}`;
+        ? `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API_KEY}&genres=${genreSlug}&ordering=-added&page_size=${PAGE_SIZE}&page=${page}`
+        : `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API_KEY}&ordering=-added&page_size=${PAGE_SIZE}&page=${page}`;
 
       const res = await fetch(url);
       const data = await res.json();
@@ -69,7 +70,7 @@ const Genre = () => {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-6 bg-gray-900 min-h-screen text-white">
+    <div className="px-4 sm:px-6 lg:px-5 py-6 bg-gray-900 min-h-screen text-white">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold">{selectedGenre} Games</h1>
@@ -90,9 +91,7 @@ const Genre = () => {
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center min-h-[300px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-          </div>
+           <Loader />
         ) : (
           <>
             <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">

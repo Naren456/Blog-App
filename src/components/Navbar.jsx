@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const [search,Setsearch] = useState('')
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -13,9 +15,16 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
-  const ChangeHandler = (e) => (
-    Setsearch(e.target.value)
-  );
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      navigate(`/search?q=${encodeURIComponent(search.trim())}`);
+    }
+  };
 
   return (
     <nav className="bg-gray-800 shadow-lg fixed w-full top-0 z-50">
@@ -25,9 +34,38 @@ const Navbar = () => {
           <Link to="/" className="flex items-center" onClick={closeMenu}>
             <span className="text-white text-lg sm:text-xl md:text-2xl font-bold tracking-wide">GameZone</span>
           </Link>
-          <div className='border-solid border-white'>
-          <input type='text'placeholder="Search here" value={search} className='w-[100px] p-2 ' onChange={ChangeHandler}/>
-        </div> 
+
+          {/* Search Bar */}
+          <form onSubmit={handleSubmit} className="flex-1 max-w-lg mx-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search games..."
+                value={search}
+                onChange={handleSearch}
+                className="w-full px-4 py-2 text-gray-700 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </form>
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
             <Link

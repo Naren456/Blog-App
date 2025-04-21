@@ -16,13 +16,13 @@ const GameDetail = () => {
   const { toggleSaveGame, isGameSaved } = useSavedGames();
   const isSaved = game ? isGameSaved(game.id) : false;
 
-  const API_KEY = 'a52f7654d212491c82e635495ba2129a';
+
 
   useEffect(() => {
     const fetchGameDetails = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
+        const res = await fetch(`https://api.rawg.io/api/games/${id}?key=${import.meta.env.VITE_RAWG_API_KEY}`);
         const data = await res.json();
         setGame(data);
       } catch (err) {
