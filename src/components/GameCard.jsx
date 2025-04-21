@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSavedGames } from '../context/SavedGamesContext';
-import { Star, Calendar, Award, Gamepad2 } from 'lucide-react';
+import { Star, Calendar, Gamepad2 } from 'lucide-react';
 
 const GameCard = ({ game }) => {
   const navigate = useNavigate();
